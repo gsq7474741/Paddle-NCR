@@ -1,9 +1,13 @@
 # NCR-paddle
+[![require](https://img.shields.io/badge/Paddle-2.1.2-brightgreen)](REQUIRE)
 ## 简介
 * 使用 Paddle 框架复现论文 Neural Collaborative Reasoning
 * 复现指标： ML100k:HR@10>0.68
 * Test After Training = 0.6847 hr@10
 * [原文地址](https://arxiv.org/pdf/2005.08129.pdf)
+
+##论文摘要
+
 
 ## 快速使用
 
