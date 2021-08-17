@@ -12,7 +12,7 @@
 
 网络结构如下
 
-[![require](https://img.shields.io/badge/Paddle-2.1.2-brightgreen)](IMG)
+[![img](https://github.com/gsq7474741/Paddle-NCR/blob/main/readme_imgs/image2.png)](IMG)
 
 
 
