@@ -1,16 +1,16 @@
-# coding=utf-8
-
-import torch
+from x2paddle import torch2paddle
+import paddle
 import logging
 from sklearn.metrics import *
 import numpy as np
-import torch.nn.functional as F
+import paddle.nn.functional as F
+import paddle
 import os
 import pandas as pd
-from utils.rank_metrics import *
+from src.utils.rank_metrics import *
 
 
-class BaseModel(torch.nn.Module):
+class BaseModel(paddle.nn.Layer):
     """
     Base model, the following methods need to be overridden.
     parse_model_args,
@@ -33,9 +33,9 @@ class BaseModel(torch.nn.Module):
         :param model_name: model name
         :return:
         """
-        parser.add_argument('--model_path', type=str,
-                            default='../model/%s/%s.pt' % (model_name, model_name),
-                            help='Model save path.')
+        parser.add_argument('--model_path', type=str, default=\
+            '../model/%s/%s.pdiparams' % (model_name, model_name), help=\
+            'Model save path.')
         return parser
 
     @staticmethod
@@ -75,7 +75,8 @@ class BaseModel(torch.nn.Module):
                 if metric.startswith('ndcg@'):
                     ndcgs = []
                     for uid, group in df_group:
-                        ndcgs.append(ndcg_at_k(group['l'].tolist()[:k], k=k, method=1))
+                        ndcgs.append(ndcg_at_k(group['l'].tolist()[:k], k=k,
+                            method=1))
                     evaluations.append(np.average(ndcgs))
                 elif metric.startswith('hit@'):
                     hits = []
@@ -85,12 +86,14 @@ class BaseModel(torch.nn.Module):
                 elif metric.startswith('precision@'):
                     precisions = []
                     for uid, group in df_group:
-                        precisions.append(precision_at_k(group['l'].tolist()[:k], k=k))
+                        precisions.append(precision_at_k(group['l'].tolist(
+                            )[:k], k=k))
                     evaluations.append(np.average(precisions))
                 elif metric.startswith('recall@'):
                     recalls = []
                     for uid, group in df_group:
-                        recalls.append(1.0 * np.sum(group['l'][:k]) / np.sum(group['l']))
+                        recalls.append(1.0 * np.sum(group['l'][:k]) / np.
+                            sum(group['l']))
                     evaluations.append(np.average(recalls))
         return evaluations
 
@@ -101,42 +104,39 @@ class BaseModel(torch.nn.Module):
         :param m: model parameters
         :return:
         """
-        if type(m) == torch.nn.Linear:
-            torch.nn.init.normal_(m.weight, mean=0.0, std=0.01)
+        if type(m) == paddle.nn.Linear:
+            torch2paddle.normal_init_(m.weight, mean=0.0, std=0.01)
             if m.bias is not None:
-                torch.nn.init.normal_(m.bias, mean=0.0, std=0.01)
-        elif type(m) == torch.nn.Embedding:
-            torch.nn.init.normal_(m.weight, mean=0.0, std=0.01)
+                torch2paddle.normal_init_(m.bias, mean=0.0, std=0.01)
+        elif type(m) == paddle.nn.Embedding:
+            torch2paddle.normal_init_(m.weight, mean=0.0, std=0.01)
 
-    def __init__(self, label_min, label_max, feature_num, random_seed=2018, model_path='../model/Model/Model.pt'):
+    def __init__(self, label_min, label_max, feature_num, random_seed=2018,
+        model_path='../model/Model/Model.pdiparams'):
         super(BaseModel, self).__init__()
         self.label_min = label_min
         self.label_max = label_max
         self.feature_num = feature_num
         self.random_seed = random_seed
-        torch.manual_seed(self.random_seed)
-        torch.cuda.manual_seed(self.random_seed)
+        paddle.seed(self.random_seed)
         self.model_path = model_path
-
         self._init_weights()
         logging.debug(list(self.parameters()))
-
         self.total_parameters = self.count_variables()
         logging.info('# of params: %d' % self.total_parameters)
-
-        # optimizer 由runner生成并赋值
         self.optimizer = None
 
     def _init_weights(self):
-        self.x_bn = torch.nn.BatchNorm1d(self.feature_num)
-        self.prediction = torch.nn.Linear(self.feature_num, 1)
+        self.x_bn = paddle.nn.BatchNorm1D(self.feature_num)
+        self.prediction = paddle.nn.Linear(self.feature_num, 1)
 
     def count_variables(self):
         """
         count number of parameters in the model
         :return:
         """
-        total_parameters = sum(p.numel() for p in self.parameters() if p.requires_grad)
+        total_parameters = sum(p.numel() for p in self.parameters() if p.
+            requires_grad)
         return total_parameters
 
     def l2(self):
@@ -146,7 +146,7 @@ class BaseModel(torch.nn.Module):
         """
         l2 = 0
         for p in self.parameters():
-            l2 += (p ** 2).sum()
+            l2 += paddle.sum((p ** 2))
         return l2
 
     def predict(self, feed_dict):
@@ -158,10 +158,9 @@ class BaseModel(torch.nn.Module):
         """
         check_list = []
         x = self.x_bn(feed_dict['X'].float())
-        x = torch.nn.Dropout(p=feed_dict['dropout'])(x)
+        x = paddle.nn.Dropout(p=feed_dict['dropout'])(x)
         prediction = F.relu(self.prediction(x)).view([-1])
-        out_dict = {'prediction': prediction,
-                    'check': check_list}
+        out_dict = {'prediction': prediction, 'check': check_list}
         return out_dict
 
     def forward(self, feed_dict):
@@ -172,13 +171,12 @@ class BaseModel(torch.nn.Module):
         """
         out_dict = self.predict(feed_dict)
         if feed_dict['rank'] == 1:
-            # 计算topn推荐的loss，batch前一半是正例，后一半是负例
             batch_size = int(feed_dict['Y'].shape[0] / 2)
-            pos, neg = out_dict['prediction'][:batch_size], out_dict['prediction'][batch_size:]
-            loss = -(pos - neg).sigmoid().log().sum()
+            pos, neg = out_dict['prediction'][:batch_size], out_dict[
+                'prediction'][batch_size:]
+            loss = -paddle.sum(paddle.log(F.sigmoid((pos - neg))))
         else:
-            # 计算rating/clicking预测的loss，默认使用mse
-            loss = torch.nn.MSELoss()(out_dict['prediction'], feed_dict['Y'])
+            loss = paddle.nn.MSELoss()(out_dict['prediction'], feed_dict['Y'])
         out_dict['loss'] = loss
         return out_dict
 
@@ -194,7 +192,7 @@ class BaseModel(torch.nn.Module):
         dir_path = os.path.dirname(model_path)
         if not os.path.exists(dir_path):
             os.mkdir(dir_path)
-        torch.save(self.state_dict(), model_path)
+        paddle.save(self.state_dict(), model_path)
         logging.info('Save model to ' + model_path)
 
     def load_model(self, model_path=None):
@@ -203,6 +201,6 @@ class BaseModel(torch.nn.Module):
         """
         if model_path is None:
             model_path = self.model_path
-        self.load_state_dict(torch.load(model_path))
+        self.load_state_dict(paddle.load(model_path))
         self.eval()
         logging.info('Load model from ' + model_path)

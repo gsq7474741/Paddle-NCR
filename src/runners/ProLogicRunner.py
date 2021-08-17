@@ -1,20 +1,21 @@
-# coding=utf-8
-
-import torch.nn.functional as F
+import paddle.nn.functional as F
 import logging
-import torch
+import paddle
+import paddle
 import pickle
-from utils import utils, global_p
+from src.utils import utils
+from src.utils import global_p
 from tqdm import tqdm
 import numpy as np
 import copy
 from sklearn.metrics import *
 import itertools
 import pandas as pd
-from runners.BaseRunner import BaseRunner
+from src.runners.BaseRunner import BaseRunner
 
 
 class ProLogicRunner(BaseRunner):
+
     @staticmethod
     def parse_runner_args(parser):
         """
@@ -22,34 +23,35 @@ class ProLogicRunner(BaseRunner):
         :param parser:
         :return:
         """
-        parser.add_argument('--load', type=int, default=0,
-                            help='Whether load model and continue to train')
-        parser.add_argument('--epoch', type=int, default=100,
-                            help='Number of epochs.')
-        parser.add_argument('--check_epoch', type=int, default=1,
-                            help='Check every epochs.')
-        parser.add_argument('--early_stop', type=int, default=1,
-                            help='whether to early-stop.')
-        parser.add_argument('--lr', type=float, default=0.01,
-                            help='Learning rate.')
-        parser.add_argument('--batch_size', type=int, default=128,
-                            help='Batch size during training.')
-        parser.add_argument('--eval_batch_size', type=int, default=128 * 128,
-                            help='Batch size during testing.')
-        parser.add_argument('--dropout', type=float, default=0.2,
-                            help='Dropout probability for each deep layer')
-        parser.add_argument('--l2', type=float, default=1e-4,
-                            help='Weight of l2_regularize in loss.')
-        parser.add_argument('--optimizer', type=str, default='GD',
-                            help='optimizer: GD, Adam, Adagrad')
-        parser.add_argument('--metric', type=str, default="RMSE",
-                            help='metrics: RMSE, MAE, AUC, F1, Accuracy, Precision, Recall')
-        parser.add_argument('--skip_eval', type=int, default=0,
-                            help='number of epochs without evaluation')
+        parser.add_argument('--load', type=int, default=0, help=\
+            'Whether load model and continue to train')
+        parser.add_argument('--epoch', type=int, default=100, help=\
+            'Number of epochs.')
+        parser.add_argument('--check_epoch', type=int, default=1, help=\
+            'Check every epochs.')
+        parser.add_argument('--early_stop', type=int, default=1, help=\
+            'whether to early-stop.')
+        parser.add_argument('--lr', type=float, default=0.01, help=\
+            'Learning rate.')
+        parser.add_argument('--batch_size', type=int, default=128, help=\
+            'Batch size during training.')
+        parser.add_argument('--eval_batch_size', type=int, default=128 * 
+            128, help='Batch size during testing.')
+        parser.add_argument('--dropout', type=float, default=0.2, help=\
+            'Dropout probability for each deep layer')
+        parser.add_argument('--l2', type=float, default=0.0001, help=\
+            'Weight of l2_regularize in loss.')
+        parser.add_argument('--optimizer', type=str, default='GD', help=\
+            'optimizer: GD, Adam, Adagrad')
+        parser.add_argument('--metric', type=str, default='RMSE', help=\
+            'metrics: RMSE, MAE, AUC, F1, Accuracy, Precision, Recall')
+        parser.add_argument('--skip_eval', type=int, default=0, help=\
+            'number of epochs without evaluation')
         return parser
 
-    def __init__(self, optimizer='GD', learning_rate=0.01, epoch=100, batch_size=128, eval_batch_size=128 * 128,
-                 dropout=0.2, l2=1e-5, metrics='RMSE', check_epoch=10, early_stop=1):
+    def __init__(self, optimizer='GD', learning_rate=0.01, epoch=100,
+        batch_size=128, eval_batch_size=128 * 128, dropout=0.2, l2=1e-05,
+        metrics='RMSE', check_epoch=10, early_stop=1):
         """
         初始化
         :param optimizer: 优化器名字
@@ -63,10 +65,10 @@ class ProLogicRunner(BaseRunner):
         :param check_epoch: 每几轮输出check一次模型中间的一些tensor
         :param early_stop: 是否自动提前终止训练
         """
-        BaseRunner.__init__(self, optimizer=optimizer, learning_rate=learning_rate,
-                            epoch=epoch, batch_size=batch_size, eval_batch_size=eval_batch_size,
-                            dropout=dropout, l2=l2, metrics=metrics,
-                            check_epoch=check_epoch, early_stop=early_stop)
+        BaseRunner.__init__(self, optimizer=optimizer, learning_rate=\
+            learning_rate, epoch=epoch, batch_size=batch_size,
+            eval_batch_size=eval_batch_size, dropout=dropout, l2=l2,
+            metrics=metrics, check_epoch=check_epoch, early_stop=early_stop)
 
     def accuracy_calc(self, p, l):
         """
@@ -90,15 +92,17 @@ class ProLogicRunner(BaseRunner):
                 tag[index] = 1 - tag[index]
         return new_data
 
-    def _boolean_evaluate(self, model, data, data_processor, bit_reverse_index):
+    def _boolean_evaluate(self, model, data, data_processor, bit_reverse_index
+        ):
         new_data = self._data_reformat(data, bit_reverse_index)
-        batches = data_processor.prepare_batches(new_data, self.eval_batch_size, train=False)
+        batches = data_processor.prepare_batches(new_data, self.
+            eval_batch_size, train=False)
         batches = self.batches_add_control(batches, train=False)
-
         predictions = []
         interims = []
         model.eval()
-        for batch in tqdm(batches, leave=False, ncols=100, mininterval=1, desc='Predict'):
+        for batch in tqdm(batches, leave=False, ncols=100, mininterval=1,
+            desc='Predict'):
             result = model.predict(batch)
             prediction = result['prediction']
             interim = result['interim']
@@ -107,12 +111,12 @@ class ProLogicRunner(BaseRunner):
         predictions = np.concatenate(predictions)
         interims = np.concatenate(interims, axis=0)
         sample_ids = np.concatenate([b[global_p.K_SAMPLE_ID] for b in batches])
-
         reorder_dict = dict(zip(sample_ids, predictions))
-        predictions = np.array([reorder_dict[i] for i in data[global_p.K_SAMPLE_ID]])
+        predictions = np.array([reorder_dict[i] for i in data[global_p.
+            K_SAMPLE_ID]])
         reorder_dict_2 = dict(zip(sample_ids, interims))
-
-        interims = np.array([reorder_dict_2[i] for i in data[global_p.K_SAMPLE_ID]])
+        interims = np.array([reorder_dict_2[i] for i in data[global_p.
+            K_SAMPLE_ID]])
         return predictions, interims
 
     @staticmethod
@@ -175,14 +179,17 @@ class ProLogicRunner(BaseRunner):
             if original[key] == updated[key]:
                 unchanged_dict[original[key]] = item_dict[original[key]]
             else:
-                changed_dict[key] = {original[key]: item_dict[original[key]], updated[key]: item_dict[updated[key]]}
+                changed_dict[key] = {original[key]: item_dict[original[key]
+                    ], updated[key]: item_dict[updated[key]]}
         unchanged_freq_max = max(unchanged_dict, key=unchanged_dict.get)
         unchanged_freq_min = min(unchanged_dict, key=unchanged_dict.get)
-        unchanged_freq_mean = np.array([unchanged_dict[k] for k in unchanged_dict]).mean()
-        logging.info("unchanged_freq_max: {}".format(unchanged_dict[unchanged_freq_max]))
-        logging.info("unchanged_freq_min: {}".format(unchanged_dict[unchanged_freq_min]))
-        logging.info("unchanged_freq_mean: {}".format(unchanged_freq_mean))
-
+        unchanged_freq_mean = np.array([unchanged_dict[k] for k in
+            unchanged_dict]).mean()
+        logging.info('unchanged_freq_max: {}'.format(unchanged_dict[
+            unchanged_freq_max]))
+        logging.info('unchanged_freq_min: {}'.format(unchanged_dict[
+            unchanged_freq_min]))
+        logging.info('unchanged_freq_mean: {}'.format(unchanged_freq_mean))
         return unchanged_dict, changed_dict
 
     def boolean_test(self, model, data, data_processor):
@@ -200,27 +207,22 @@ class ProLogicRunner(BaseRunner):
                 length_dict[l] = []
             length_dict[l].append(idx)
         lengths = list(length_dict.keys())
-        # for key in lengths:
-        #     print('{}: {}'.format(key, len(length_dict[key])))
-
-        # accumulate_accuracy = 0.
-        result_dict = {}    # store the accuracy of given number of bits are reversed.
+        result_dict = {}
         counter_dict = {}
         info_dict = {}
-        for l in tqdm(lengths, leave=False, ncols=100, mininterval=1, desc='Prepare Batches'):
+        for l in tqdm(lengths, leave=False, ncols=100, mininterval=1, desc=\
+            'Prepare Batches'):
             rows = length_dict[l]
             tmp_data = {}
             for key in data:
                 if data[key].dtype == np.object:
-                    tmp_data[key] = np.array([np.array(data[key][r]) for r in rows])
-                    # tmp_data['id'] = np.array([r] for r in rows)
+                    tmp_data[key] = np.array([np.array(data[key][r]) for r in
+                        rows])
                 else:
                     tmp_data[key] = data[key][rows]
-                    # tmp_data['id'] = np.array([r] for r in rows)
             expression_length = len(tmp_data[global_p.C_HISTORY][0])
             index_set = [i for i in range(expression_length)]
             index_sets_dict = self._enum_subsets(index_set)
-
             tmp_interim = None
             for key in index_sets_dict:
                 acc_counter = 0
@@ -230,49 +232,46 @@ class ProLogicRunner(BaseRunner):
                 for index_list in index_sets_dict[key]:
                     p = self.predict(model, tmp_data, data_processor)
                     original_predict = self._gen_prediction_dict(p, tmp_data)
-
-                    predictions, interims = self._boolean_evaluate(model, tmp_data, data_processor, index_list)
-                    updated_predict = self._gen_prediction_dict(predictions, tmp_data)
-
+                    predictions, interims = self._boolean_evaluate(model,
+                        tmp_data, data_processor, index_list)
+                    updated_predict = self._gen_prediction_dict(predictions,
+                        tmp_data)
                     if tmp_interim is None:
                         tmp_interim = copy.deepcopy(interims)
                     else:
-                        acc_sim += F.cosine_similarity(torch.from_numpy(tmp_interim), torch.from_numpy(interims), dim=-1).mean()
-
+                        acc_sim += paddle.nn.functional.cosine_similarity(
+                            paddle.to_tensor(tmp_interim), paddle.to_tensor
+                            (interims), axis=-1).mean()
                         tmp_interim = copy.deepcopy(interims)
                         sim_counter += 1
-
                     self._statistic_info(original_predict)
-                    unchanged_dict, changed_dict = self._statistic_of_difference(original_predict, updated_predict)
-                    # print(unchanged_dict)
-                    # print(changed_dict)
+                    unchanged_dict, changed_dict = (self.
+                        _statistic_of_difference(original_predict,
+                        updated_predict))
                     print(asasd)
-                    tmp_counter, tmp_len = self._accuracy_calc_from_dict(original_predict, updated_predict)
+                    tmp_counter, tmp_len = self._accuracy_calc_from_dict(
+                        original_predict, updated_predict)
                     acc_counter += tmp_counter
                     acc_len += tmp_len
-
                     tmp_str = ' '.join([str(e) for e in index_list])
                     if tmp_str not in info_dict:
                         info_dict[tmp_str] = tmp_counter / tmp_len
-
                 accuracy = acc_counter / acc_len
                 similarity = acc_sim / sim_counter
                 if key not in result_dict:
-                    result_dict[key] = {'accuracy': accuracy, 'similarity': similarity}
+                    result_dict[key] = {'accuracy': accuracy, 'similarity':
+                        similarity}
                     counter_dict[key] = 1
                 else:
                     result_dict[key]['accuracy'] += accuracy
                     result_dict[key]['similarity'] += similarity
                     counter_dict[key] += 1
-                # accumulate_accuracy += (accuracy / expression_length)
         for key in result_dict:
             logging.info(
-                '{} bit reverse average accuracy: {}\taverage similarity: {}'.format(
-                    str(key),
-                    result_dict[key]['accuracy'] / counter_dict[key],
-                    result_dict[key]['similarity'] / counter_dict[key]
-                )
-            )
+                '{} bit reverse average accuracy: {}\taverage similarity: {}'
+                .format(str(key), result_dict[key]['accuracy'] /
+                counter_dict[key], result_dict[key]['similarity'] /
+                counter_dict[key]))
         logging.info('----------- Details ------------')
         for key in info_dict:
             logging.info(str(key) + ': ' + str(info_dict[key]))

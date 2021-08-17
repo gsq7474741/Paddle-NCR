@@ -1,11 +1,11 @@
-# coding=utf-8
+import paddle
 import os
 import pandas as pd
 import numpy as np
 from collections import Counter
 import logging
-from utils.mining import group_user_interactions_df
-from utils import global_p
+from src.utils.mining import group_user_interactions_df
+from src.utils import global_p
 import json
 
 
@@ -21,17 +21,18 @@ class DataLoader(object):
         :param parser:
         :return:
         """
-        parser.add_argument('--path', type=str, default='../dataset/',
-                            help='Input data dir.')
+        parser.add_argument('--path', type=str, default='../dataset/', help
+            ='Input data dir.')
         parser.add_argument('--dataset', type=str, default='ml100k-1-5',
-                            help='Choose a dataset.')
-        parser.add_argument('--sep', type=str, default='\t',
-                            help='sep of csv file.')
-        parser.add_argument('--label', type=str, default='label',
-                            help='name of dataset label column.')
+            help='Choose a dataset.')
+        parser.add_argument('--sep', type=str, default='\t', help=\
+            'sep of csv file.')
+        parser.add_argument('--label', type=str, default='label', help=\
+            'name of dataset label column.')
         return parser
 
-    def __init__(self, path, dataset, label='label', load_data=True, sep='\t', seqs_sep=','):
+    def __init__(self, path, dataset, label='label', load_data=True, sep=\
+        '\t', seqs_sep=','):
         """
         Initialization
         :param path: dataset path
@@ -43,18 +44,25 @@ class DataLoader(object):
         """
         self.dataset = dataset
         self.path = os.path.join(path, dataset)
-        self.train_file = os.path.join(self.path, dataset + global_p.TRAIN_SUFFIX)
-        self.validation_file = os.path.join(self.path, dataset + global_p.VALIDATION_SUFFIX)
-        self.test_file = os.path.join(self.path, dataset + global_p.TEST_SUFFIX)
-        self.info_file = os.path.join(self.path, dataset + global_p.INFO_SUFFIX)
-        self.user_file = os.path.join(self.path, dataset + global_p.USER_SUFFIX)
-        self.item_file = os.path.join(self.path, dataset + global_p.ITEM_SUFFIX)
-        self.train_his_file = os.path.join(self.path, dataset + global_p.TRAIN_GROUP_SUFFIX)
-        self.vt_his_file = os.path.join(self.path, dataset + global_p.VT_GROUP_SUFFIX)
+        self.train_file = os.path.join(self.path, dataset + global_p.
+            TRAIN_SUFFIX)
+        self.validation_file = os.path.join(self.path, dataset + global_p.
+            VALIDATION_SUFFIX)
+        self.test_file = os.path.join(self.path, dataset + global_p.TEST_SUFFIX
+            )
+        self.info_file = os.path.join(self.path, dataset + global_p.INFO_SUFFIX
+            )
+        self.user_file = os.path.join(self.path, dataset + global_p.USER_SUFFIX
+            )
+        self.item_file = os.path.join(self.path, dataset + global_p.ITEM_SUFFIX
+            )
+        self.train_his_file = os.path.join(self.path, dataset + global_p.
+            TRAIN_GROUP_SUFFIX)
+        self.vt_his_file = os.path.join(self.path, dataset + global_p.
+            VT_GROUP_SUFFIX)
         self.sep, self.seqs_sep = sep, seqs_sep
         self.load_data = load_data
         self.label = label
-
         self.train_df, self.validation_df, self.test_df = None, None, None
         self._load_user_item()
         self._load_data()
@@ -68,10 +76,10 @@ class DataLoader(object):
         """
         self.user_df, self.item_df = None, None
         if os.path.exists(self.user_file) and self.load_data:
-            logging.info("load user csv...")
+            logging.info('load user csv...')
             self.user_df = pd.read_csv(self.user_file, sep='\t')
         if os.path.exists(self.item_file) and self.load_data:
-            logging.info("load item csv...")
+            logging.info('load item csv...')
             self.item_df = pd.read_csv(self.item_file, sep='\t')
 
     def _load_data(self):
@@ -80,17 +88,18 @@ class DataLoader(object):
         :return:
         """
         if os.path.exists(self.train_file) and self.load_data:
-            logging.info("load train csv...")
+            logging.info('load train csv...')
             self.train_df = pd.read_csv(self.train_file, sep=self.sep)
-            logging.info("size of train: %d" % len(self.train_df))
+            logging.info('size of train: %d' % len(self.train_df))
         if os.path.exists(self.validation_file) and self.load_data:
-            logging.info("load validation csv...")
-            self.validation_df = pd.read_csv(self.validation_file, sep=self.sep)
-            logging.info("size of validation: %d" % len(self.validation_df))
+            logging.info('load validation csv...')
+            self.validation_df = pd.read_csv(self.validation_file, sep=self.sep
+                )
+            logging.info('size of validation: %d' % len(self.validation_df))
         if os.path.exists(self.test_file) and self.load_data:
-            logging.info("load test csv...")
+            logging.info('load test csv...')
             self.test_df = pd.read_csv(self.test_file, sep=self.sep)
-            logging.info("size of test: %d" % len(self.test_df))
+            logging.info('size of test: %d' % len(self.test_df))
 
     def _load_info(self):
         """
@@ -101,12 +110,11 @@ class DataLoader(object):
         def json_type(o):
             if isinstance(o, np.int64):
                 return int(o)
-            # if isinstance(o, np.float32): return int(o)
             raise TypeError
-
         max_dict, min_dict = {}, {}
         if not os.path.exists(self.info_file):
-            for df in [self.train_df, self.validation_df, self.test_df, self.user_df, self.item_df]:
+            for df in [self.train_df, self.validation_df, self.test_df,
+                self.user_df, self.item_df]:
                 if df is None:
                     continue
                 for c in df.columns:
@@ -126,32 +134,30 @@ class DataLoader(object):
             lines = open(self.info_file, 'r').readlines()
             max_dict = json.loads(lines[0])
             min_dict = json.loads(lines[1])
-
         self.column_max = max_dict
         self.column_min = min_dict
-
-        # label max/min value
         self.label_max = self.column_max[self.label]
         self.label_min = self.column_min[self.label]
-        logging.info("label: %d-%d" % (self.label_min, self.label_max))
-
-        # #users, # items
+        logging.info('label: %d-%d' % (self.label_min, self.label_max))
         self.user_num, self.item_num = 0, 0
         if 'uid' in self.column_max:
             self.user_num = self.column_max['uid'] + 1
         if 'iid' in self.column_max:
             self.item_num = self.column_max['iid'] + 1
-        logging.info("# of users: %d" % self.user_num)
-        logging.info("# of items: %d" % self.item_num)
-
-        self.user_features = [f for f in self.column_max.keys() if f.startswith('u_')]
-        logging.info("# of user features: %d" % len(self.user_features))
-        self.item_features = [f for f in self.column_max.keys() if f.startswith('i_')]
-        logging.info("# of item features: %d" % len(self.item_features))
-        self.context_features = [f for f in self.column_max.keys() if f.startswith('c_')]
-        logging.info("# of context features: %d" % len(self.context_features))
-        self.features = self.context_features + self.user_features + self.item_features
-        logging.info("# of features: %d" % len(self.features))
+        logging.info('# of users: %d' % self.user_num)
+        logging.info('# of items: %d' % self.item_num)
+        self.user_features = [f for f in self.column_max.keys() if f.
+            startswith('u_')]
+        logging.info('# of user features: %d' % len(self.user_features))
+        self.item_features = [f for f in self.column_max.keys() if f.
+            startswith('i_')]
+        logging.info('# of item features: %d' % len(self.item_features))
+        self.context_features = [f for f in self.column_max.keys() if f.
+            startswith('c_')]
+        logging.info('# of context features: %d' % len(self.context_features))
+        self.features = (self.context_features + self.user_features + self.
+            item_features)
+        logging.info('# of features: %d' % len(self.features))
 
     def _load_his(self):
         """
@@ -162,33 +168,34 @@ class DataLoader(object):
         if not self.load_data:
             return
         if not os.path.exists(self.train_his_file):
-            logging.info("building train history csv...")
-            train_his_df = group_user_interactions_df(self.train_df, label=self.label, seq_sep=self.seqs_sep)
+            logging.info('building train history csv...')
+            train_his_df = group_user_interactions_df(self.train_df, label=\
+                self.label, seq_sep=self.seqs_sep)
             train_his_df.to_csv(self.train_his_file, index=False, sep=self.sep)
         if not os.path.exists(self.vt_his_file):
-            logging.info("building vt history csv...")
+            logging.info('building vt history csv...')
             vt_df = pd.concat([self.validation_df, self.test_df])
-            vt_his_df = group_user_interactions_df(vt_df, label=self.label, seq_sep=self.seqs_sep)
+            vt_his_df = group_user_interactions_df(vt_df, label=self.label,
+                seq_sep=self.seqs_sep)
             vt_his_df.to_csv(self.vt_his_file, index=False, sep=self.sep)
 
         def build_his(his_df, seqs_sep):
             uids = his_df['uid'].tolist()
             iids = his_df['iids'].str.split(seqs_sep).values
-            # iids = [i.split(self.seqs_sep) for i in his_df['iids'].tolist()]
             iids = [[int(j) for j in i] for i in iids]
             user_his = dict(zip(uids, iids))
             return user_his
-
         self.train_his_df, self.train_user_his = None, None
         self.vt_his_df, self.vt_user_his = None, None
         if self.load_data:
-            logging.info("load history csv...")
+            logging.info('load history csv...')
             self.train_his_df = pd.read_csv(self.train_his_file, sep=self.sep)
             self.train_user_his = build_his(self.train_his_df, self.seqs_sep)
             self.vt_his_df = pd.read_csv(self.vt_his_file, sep=self.sep)
             self.vt_user_his = build_his(self.vt_his_df, self.seqs_sep)
 
-    def feature_info(self, include_id=True, include_item_features=True, include_user_features=True):
+    def feature_info(self, include_id=True, include_item_features=True,
+        include_user_features=True):
         features = []
         if include_id:
             features.extend(['uid', 'iid'])
@@ -222,17 +229,18 @@ class DataLoader(object):
             if df is None:
                 continue
             history, neg_history = [], []
-            uids, iids, labels = df['uid'].tolist(), df['iid'].tolist(), df[self.label].tolist()
+            uids, iids, labels = df['uid'].tolist(), df['iid'].tolist(), df[
+                self.label].tolist()
             for i, uid in enumerate(uids):
                 iid, label = str(iids[i]), labels[i]
-
                 if uid not in his_dict:
                     his_dict[uid] = []
                 if uid not in neg_dict:
                     neg_dict[uid] = []
-
-                tmp_his = his_dict[uid] if last_n <= 0 else his_dict[uid][-last_n:]
-                tmp_neg = neg_dict[uid] if last_n <= 0 else neg_dict[uid][-last_n:]
+                tmp_his = his_dict[uid] if last_n <= 0 else his_dict[uid][-
+                    last_n:]
+                tmp_neg = neg_dict[uid] if last_n <= 0 else neg_dict[uid][-
+                    last_n:]
                 if supply:
                     tmp_his = tmp_his + ['-1'] * last_n
                     tmp_neg = tmp_neg + ['-1'] * last_n
@@ -250,12 +258,15 @@ class DataLoader(object):
 
     def drop_neg(self):
         logging.info('Drop Neg Samples...')
-        self.train_df = self.train_df[self.train_df[self.label] > 0].reset_index(drop=True)
-        self.validation_df = self.validation_df[self.validation_df[self.label] > 0].reset_index(drop=True)
-        self.test_df = self.test_df[self.test_df[self.label] > 0].reset_index(drop=True)
+        self.train_df = self.train_df[self.train_df[self.label] > 0
+            ].reset_index(drop=True)
+        self.validation_df = self.validation_df[self.validation_df[self.
+            label] > 0].reset_index(drop=True)
+        self.test_df = self.test_df[self.test_df[self.label] > 0].reset_index(
+            drop=True)
         self.train_df[self.label] = 1
         self.validation_df[self.label] = 1
         self.test_df[self.label] = 1
-        logging.info("size of train: %d" % len(self.train_df))
-        logging.info("size of validation: %d" % len(self.validation_df))
-        logging.info("size of test: %d" % len(self.test_df))
+        logging.info('size of train: %d' % len(self.train_df))
+        logging.info('size of validation: %d' % len(self.validation_df))
+        logging.info('size of test: %d' % len(self.test_df))

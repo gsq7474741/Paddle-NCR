@@ -1,5 +1,4 @@
-# coding=utf-8
-
+import paddle
 import pandas as pd
 
 
