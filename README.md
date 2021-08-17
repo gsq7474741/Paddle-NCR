@@ -6,10 +6,31 @@
 * Test After Training = 0.6847 hr@10
 * [原文地址](https://arxiv.org/pdf/2005.08129.pdf)
 
-##论文摘要
+## 论文摘要
+现有的协同过滤（CF）方法大多是基于匹配的思想设计的，然而，作为一项认知而非感知的智能任务，推荐不仅需要数据的模式识别和匹配能力，还需要数据的认知推理能力。
+本文中作者提出了协同推理（CR），提出了一个模块化的推理体系结构，学习且(∧) , 或(∨) , 非（¬）等逻辑符号作为神经网络来实现蕴涵推理( →) 。
+
+网络结构如下
+
+[![require](https://img.shields.io/badge/Paddle-2.1.2-brightgreen)](IMG)
+
 
 
 ## 快速使用
+### 环境
+* Python>=3.7
+
+* 具体要求见见[requirements.txt](https://github.com/gsq7474741/Paddle-NCR/blob/main/requirements.txt)
+  
+* ```requirements.txt
+  paddlepaddle==2.1.2
+  x2paddle==1.3.1
+  numpy==1.18.1
+  pandas==0.24.2
+  scipy==1.3.0
+  tqdm==4.32.1
+  scikit_learn==0.23.1
+  ```
 
 ### 模型训练
 * 使用命令行启动模型训练
