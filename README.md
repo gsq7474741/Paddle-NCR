@@ -14,6 +14,16 @@
 
 [![img](https://github.com/gsq7474741/Paddle-NCR/blob/main/readme_imgs/image2.png)](IMG)
 
+网络的embedding和逻辑单元均使用双层全连接，使用ReLU作为激活函数
+
+[![img](https://github.com/gsq7474741/Paddle-NCR/blob/main/readme_imgs/image3.png)](IMG)
+
+作者使用逻辑正则化来训练或（OR）、非（NOT）模块
+
+[![img](https://github.com/gsq7474741/Paddle-NCR/blob/main/readme_imgs/image6.png)](IMG)
+
+
+
 
 
 ## 快速使用
