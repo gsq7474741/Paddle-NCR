@@ -1,0 +1,290 @@
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '1', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 1, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams', 'load': 0, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.001, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.001, 'optimizer': 'Adam', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda devices: 1
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0408,0.0545,0.0648,0.1083 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Prepare Train Data...
+INFO:root:Prepare Validation Data...
+INFO:root:Init: 	 train= 0.9601,0.7722 validation= 0.0336,0.0470,0.0488,0.0913 test= 0.0368,0.0511,0.0573,0.1019 [2.2 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Optimizer: Adam
+INFO:root:
+
+INFO:root:loss = 36.8960, l2 = 0.6563
+INFO:root:Epoch     1 [24.3 s]	 train= 3.6292,3.3831 validation= 0.1794,0.2301,0.2781,0.4352 test= 0.1780,0.2219,0.2771,0.4151 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 42.2924, l2 = 0.6870
+INFO:root:Epoch     2 [27.3 s]	 train= 4.0472,3.8188 validation= 0.1957,0.2447,0.2919,0.4448 test= 0.1888,0.2370,0.2877,0.4384 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 24.9646, l2 = 0.7432
+INFO:root:Epoch     3 [23.9 s]	 train= 5.1767,5.0519 validation= 0.2291,0.2828,0.3493,0.5149 test= 0.2135,0.2690,0.3185,0.4894 [2.5 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 23.5984, l2 = 0.8073
+INFO:root:Epoch     4 [24.9 s]	 train= 5.4856,5.3313 validation= 0.2733,0.3277,0.4066,0.5743 test= 0.2645,0.3161,0.3864,0.5467 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 26.0522, l2 = 0.8632
+INFO:root:Epoch     5 [23.3 s]	 train= 5.4264,5.1947 validation= 0.3104,0.3713,0.4469,0.6359 test= 0.3221,0.3647,0.4671,0.5987 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 17.3823, l2 = 0.9109
+INFO:root:Epoch     6 [24.2 s]	 train= 5.1796,4.9133 validation= 0.3349,0.3944,0.4915,0.6773 test= 0.3197,0.3755,0.4597,0.6327 [2.1 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 21.9626, l2 = 0.9500
+INFO:root:Epoch     7 [25.4 s]	 train= 5.3013,5.1007 validation= 0.3160,0.3758,0.4692,0.6539 test= 0.3150,0.3651,0.4512,0.6062 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 16.0163, l2 = 0.9885
+INFO:root:Epoch     8 [24.7 s]	 train= 4.8808,4.6476 validation= 0.3150,0.3695,0.4682,0.6380 test= 0.2916,0.3519,0.4225,0.6093 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 10.5577, l2 = 1.0255
+INFO:root:Epoch     9 [23.4 s]	 train= 5.2674,5.0123 validation= 0.3610,0.4072,0.5223,0.6667 test= 0.3379,0.3893,0.4873,0.6476 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 13.5264, l2 = 1.0633
+INFO:root:Epoch    10 [23.8 s]	 train= 5.1000,4.8112 validation= 0.3564,0.4103,0.5180,0.6847 test= 0.3126,0.3690,0.4480,0.6210 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 15.4402, l2 = 1.0967
+INFO:root:Epoch    11 [23.5 s]	 train= 4.7842,4.5013 validation= 0.3560,0.4146,0.5106,0.6911 test= 0.3200,0.3741,0.4724,0.6401 [2.7 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 13.1917, l2 = 1.1262
+INFO:root:Epoch    12 [23.8 s]	 train= 5.6114,5.3520 validation= 0.3509,0.4086,0.5042,0.6815 test= 0.3302,0.3822,0.4766,0.6380 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 12.3017, l2 = 1.1587
+INFO:root:Epoch    13 [23.0 s]	 train= 4.8907,4.5294 validation= 0.3639,0.4200,0.5255,0.6996 test= 0.3432,0.3948,0.4947,0.6550 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 13.8265, l2 = 1.1883
+INFO:root:Epoch    14 [24.4 s]	 train= 4.4809,4.0752 validation= 0.3435,0.3976,0.5000,0.6677 test= 0.3341,0.3864,0.4883,0.6497 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 18.1402, l2 = 1.2185
+INFO:root:Epoch    15 [23.6 s]	 train= 5.2054,4.9570 validation= 0.3378,0.3949,0.4713,0.6476 test= 0.3105,0.3733,0.4618,0.6561 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 3.1317, l2 = 1.2465
+WARNING:root:l2 inappropriate: loss = 3.1317, l2 = 1.2465
+INFO:root:Epoch    16 [23.6 s]	 train= 5.0872,4.8331 validation= 0.3840,0.4339,0.5382,0.6932 test= 0.3357,0.3894,0.4904,0.6550 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 8.2421, l2 = 1.2739
+WARNING:root:l2 inappropriate: loss = 8.2421, l2 = 1.2739
+INFO:root:Epoch    17 [23.5 s]	 train= 5.1752,4.9471 validation= 0.3698,0.4263,0.5255,0.7006 test= 0.3481,0.4019,0.5042,0.6709 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 16.7289, l2 = 1.3045
+INFO:root:Epoch    18 [23.1 s]	 train= 4.1903,3.8142 validation= 0.3554,0.4156,0.5117,0.6985 test= 0.3247,0.3806,0.4660,0.6391 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 5.2685, l2 = 1.3319
+WARNING:root:l2 inappropriate: loss = 5.2685, l2 = 1.3319
+INFO:root:Epoch    19 [23.4 s]	 train= 5.5895,5.3855 validation= 0.3620,0.4224,0.5223,0.7091 test= 0.3322,0.3851,0.4936,0.6571 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 13.8115, l2 = 1.3542
+INFO:root:Epoch    20 [23.3 s]	 train= 5.3393,5.1427 validation= 0.3680,0.4201,0.5318,0.6932 test= 0.3415,0.4032,0.4820,0.6730 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 13.7349, l2 = 1.3781
+WARNING:root:l2 inappropriate: loss = 13.7349, l2 = 1.3781
+INFO:root:Epoch    21 [23.3 s]	 train= 5.1183,4.8239 validation= 0.3801,0.4350,0.5372,0.7081 test= 0.3639,0.4195,0.5085,0.6783 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 8.6107, l2 = 1.4034
+WARNING:root:l2 inappropriate: loss = 8.6107, l2 = 1.4034
+INFO:root:Epoch    22 [23.0 s]	 train= 4.8179,4.4958 validation= 0.3701,0.4220,0.5340,0.6943 test= 0.3424,0.3963,0.4883,0.6550 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 10.0813, l2 = 1.4245
+WARNING:root:l2 inappropriate: loss = 10.0813, l2 = 1.4245
+INFO:root:Epoch    23 [23.9 s]	 train= 5.5702,5.3709 validation= 0.3544,0.4122,0.5074,0.6847 test= 0.3345,0.3904,0.4830,0.6561 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 4.5701, l2 = 1.4452
+WARNING:root:l2 inappropriate: loss = 4.5701, l2 = 1.4452
+INFO:root:Epoch    24 [23.3 s]	 train= 5.2751,4.9322 validation= 0.3815,0.4371,0.5478,0.7197 test= 0.3592,0.4161,0.5117,0.6858 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 8.1356, l2 = 1.4641
+WARNING:root:l2 inappropriate: loss = 8.1356, l2 = 1.4641
+INFO:root:Epoch    25 [22.5 s]	 train= 5.9786,5.8256 validation= 0.3687,0.4293,0.5180,0.7059 test= 0.3564,0.4093,0.5096,0.6730 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 15.2106, l2 = 1.4852
+INFO:root:Epoch    26 [22.5 s]	 train= 5.1559,4.8790 validation= 0.3665,0.4248,0.5212,0.7017 test= 0.3564,0.4137,0.5032,0.6805 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 16.1392, l2 = 1.5067
+INFO:root:Epoch    27 [24.8 s]	 train= 4.5951,4.3041 validation= 0.3692,0.4272,0.5191,0.6996 test= 0.3333,0.3904,0.4873,0.6624 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 9.5302, l2 = 1.5245
+WARNING:root:l2 inappropriate: loss = 9.5302, l2 = 1.5245
+INFO:root:Epoch    28 [23.6 s]	 train= 5.6050,5.4231 validation= 0.3566,0.4128,0.5106,0.6837 test= 0.3340,0.3849,0.4947,0.6518 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 9.8019, l2 = 1.5409
+WARNING:root:l2 inappropriate: loss = 9.8019, l2 = 1.5409
+INFO:root:Epoch    29 [23.5 s]	 train= 5.2416,4.9987 validation= 0.3589,0.4177,0.5127,0.6953 test= 0.3375,0.3952,0.4947,0.6720 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 11.3085, l2 = 1.5634
+WARNING:root:l2 inappropriate: loss = 11.3085, l2 = 1.5634
+INFO:root:Epoch    30 [23.9 s]	 train= 4.6916,4.3411 validation= 0.3635,0.4154,0.5212,0.6815 test= 0.3372,0.3916,0.4926,0.6603 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 15.6031, l2 = 1.5816
+WARNING:root:l2 inappropriate: loss = 15.6031, l2 = 1.5816
+INFO:root:Epoch    31 [23.9 s]	 train= 4.9081,4.6180 validation= 0.3642,0.4175,0.5212,0.6858 test= 0.3510,0.4012,0.5149,0.6709 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 14.0768, l2 = 1.5963
+WARNING:root:l2 inappropriate: loss = 14.0768, l2 = 1.5963
+INFO:root:Epoch    32 [24.5 s]	 train= 5.4391,5.2150 validation= 0.3858,0.4470,0.5510,0.7378 test= 0.3496,0.4127,0.5127,0.7070 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save model to ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:
+
+INFO:root:loss = 13.0836, l2 = 1.6102
+WARNING:root:l2 inappropriate: loss = 13.0836, l2 = 1.6102
+INFO:root:Epoch    33 [23.4 s]	 train= 5.1540,4.8958 validation= 0.3781,0.4267,0.5541,0.7049 test= 0.3209,0.3772,0.4766,0.6507 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 20.0156, l2 = 1.6246
+INFO:root:Epoch    34 [23.6 s]	 train= 5.2765,5.0037 validation= 0.3830,0.4406,0.5520,0.7293 test= 0.3599,0.4148,0.5287,0.6953 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 12.9181, l2 = 1.6351
+WARNING:root:l2 inappropriate: loss = 12.9181, l2 = 1.6351
+INFO:root:Epoch    35 [24.0 s]	 train= 5.5903,5.3503 validation= 0.3815,0.4331,0.5435,0.7017 test= 0.3549,0.4058,0.5170,0.6730 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 8.6564, l2 = 1.6513
+WARNING:root:l2 inappropriate: loss = 8.6564, l2 = 1.6513
+INFO:root:Epoch    36 [23.4 s]	 train= 5.1947,4.9836 validation= 0.3585,0.4179,0.5159,0.7006 test= 0.3374,0.3917,0.4958,0.6624 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 4.5207, l2 = 1.6695
+WARNING:root:l2 inappropriate: loss = 4.5207, l2 = 1.6695
+INFO:root:Epoch    37 [23.4 s]	 train= 5.1702,4.9541 validation= 0.3757,0.4308,0.5435,0.7144 test= 0.3555,0.4159,0.5074,0.6932 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 6.2434, l2 = 1.6810
+WARNING:root:l2 inappropriate: loss = 6.2434, l2 = 1.6810
+INFO:root:Epoch    38 [23.4 s]	 train= 5.0384,4.7761 validation= 0.3785,0.4380,0.5414,0.7251 test= 0.3529,0.4104,0.5096,0.6879 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 13.0693, l2 = 1.6910
+WARNING:root:l2 inappropriate: loss = 13.0693, l2 = 1.6910
+INFO:root:Epoch    39 [23.6 s]	 train= 5.3188,5.0526 validation= 0.3621,0.4224,0.5191,0.7059 test= 0.3270,0.3913,0.4820,0.6815 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 5.8620, l2 = 1.7065
+WARNING:root:l2 inappropriate: loss = 5.8620, l2 = 1.7065
+INFO:root:Epoch    40 [23.3 s]	 train= 5.1478,4.9079 validation= 0.3777,0.4345,0.5435,0.7187 test= 0.3309,0.3905,0.4936,0.6773 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 12.1087, l2 = 1.7157
+WARNING:root:l2 inappropriate: loss = 12.1087, l2 = 1.7157
+INFO:root:Epoch    41 [23.4 s]	 train= 4.2754,3.9631 validation= 0.3720,0.4324,0.5372,0.7219 test= 0.3228,0.3841,0.4692,0.6582 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 10.4297, l2 = 1.7262
+WARNING:root:l2 inappropriate: loss = 10.4297, l2 = 1.7262
+INFO:root:Epoch    42 [23.4 s]	 train= 5.2494,5.0631 validation= 0.3604,0.4224,0.5276,0.7197 test= 0.3303,0.3853,0.4862,0.6571 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 7.1753, l2 = 1.7382
+WARNING:root:l2 inappropriate: loss = 7.1753, l2 = 1.7382
+INFO:root:Epoch    43 [23.5 s]	 train= 5.3045,5.0437 validation= 0.3611,0.4215,0.5138,0.6996 test= 0.3264,0.3797,0.4820,0.6497 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 4.2306, l2 = 1.7513
+WARNING:root:l2 inappropriate: loss = 4.2306, l2 = 1.7513
+INFO:root:Epoch    44 [23.3 s]	 train= 5.2293,4.9600 validation= 0.3841,0.4409,0.5478,0.7229 test= 0.3600,0.4123,0.5255,0.6879 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 6.7935, l2 = 1.7607
+WARNING:root:l2 inappropriate: loss = 6.7935, l2 = 1.7607
+INFO:root:Epoch    45 [22.6 s]	 train= 5.7867,5.5935 validation= 0.3679,0.4262,0.5255,0.7049 test= 0.3482,0.4003,0.4947,0.6550 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 5.6492, l2 = 1.7676
+WARNING:root:l2 inappropriate: loss = 5.6492, l2 = 1.7676
+INFO:root:Epoch    46 [23.9 s]	 train= 5.3103,5.1048 validation= 0.3766,0.4378,0.5297,0.7208 test= 0.3481,0.4004,0.5159,0.6794 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 3.0783, l2 = 1.7787
+WARNING:root:l2 inappropriate: loss = 3.0783, l2 = 1.7787
+INFO:root:Epoch    47 [23.4 s]	 train= 5.9637,5.7140 validation= 0.3682,0.4209,0.5308,0.6932 test= 0.3379,0.3972,0.4873,0.6709 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 6.4987, l2 = 1.7880
+WARNING:root:l2 inappropriate: loss = 6.4987, l2 = 1.7880
+INFO:root:Epoch    48 [22.5 s]	 train= 4.6959,4.4252 validation= 0.3624,0.4177,0.5191,0.6890 test= 0.3332,0.3893,0.4915,0.6635 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 3.3946, l2 = 1.7984
+WARNING:root:l2 inappropriate: loss = 3.3946, l2 = 1.7984
+INFO:root:Epoch    49 [23.0 s]	 train= 4.7324,4.4172 validation= 0.3677,0.4201,0.5318,0.6943 test= 0.3434,0.4034,0.5021,0.6879 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 7.0779, l2 = 1.8114
+WARNING:root:l2 inappropriate: loss = 7.0779, l2 = 1.8114
+INFO:root:Epoch    50 [22.5 s]	 train= 5.1143,4.8321 validation= 0.3603,0.4156,0.5202,0.6900 test= 0.3402,0.3901,0.5000,0.6561 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 9.5013, l2 = 1.8224
+WARNING:root:l2 inappropriate: loss = 9.5013, l2 = 1.8224
+INFO:root:Epoch    51 [24.7 s]	 train= 5.1667,4.9113 validation= 0.3669,0.4241,0.5234,0.6996 test= 0.3516,0.4053,0.5170,0.6805 [2.0 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:
+
+INFO:root:loss = 9.4334, l2 = 1.8326
+WARNING:root:l2 inappropriate: loss = 9.4334, l2 = 1.8326
+INFO:root:Epoch    52 [23.3 s]	 train= 4.8949,4.5573 validation= 0.3715,0.4303,0.5361,0.7166 test= 0.3334,0.3943,0.4798,0.6677 [1.9 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Early stop at 52 based on validation result.
+INFO:root:Best Iter(validation)=    32	 train= 5.4391,5.2150 valid= 0.3858,0.4470,0.5510,0.7378 test= 0.3496,0.4127,0.5127,0.7070 [1336.4 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Best Iter(test)=    21	 train= 5.1183,4.8239 valid= 0.3801,0.4350,0.5372,0.7081 test= 0.3639,0.4195,0.5085,0.6783 [1336.4 s] ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.pdiparams
+INFO:root:Test After Training = 0.3459,0.4081,0.5064,0.6975 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.001__dropout=0.2__batch_size=128.npy
