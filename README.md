@@ -49,3 +49,10 @@
   $ python ./main.py --rank 1 --model_name NCR --optimizer Adam --lr 0.001 --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 2022 --gpu 1
   ```
 * 训练日志记录在/log下
+
+### 模型测试
+* 使用命令行测试模型
+```shell
+  $ cd src
+  $ python ./main.py --rank 1 --model_name NCR --optimizer Adam --lr 0.001 --train 0 --model_path ../model/NCR/1__NCR__ml100k01-1-5__2022__optimizer=Adam__lr=0.001__l2=0.0001__dropout=0.2__batch_size=128.pdiparams --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 2022 --gpu 1
+ ```
