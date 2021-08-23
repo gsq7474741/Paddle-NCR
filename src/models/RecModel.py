@@ -1,7 +1,7 @@
 import paddle
 import paddle.nn.functional as F
-from src.models.BaseModel import BaseModel
-from src.utils import utils
+from models.BaseModel import BaseModel
+from utils import utils
 
 
 class RecModel(BaseModel):

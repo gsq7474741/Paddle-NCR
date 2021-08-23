@@ -33,7 +33,7 @@ class BaseRunner(object):
             'Learning rate.')
         parser.add_argument('--batch_size', type=int, default=128, help=\
             'Batch size during training.')
-        parser.add_argument('--eval_batch_size', type=int, default=128 * 
+        parser.add_argument('--eval_batch_size', type=int, default=128 *
             128, help='Batch size during testing.')
         parser.add_argument('--dropout', type=float, default=0.2, help=\
             'Dropout probability for each deep layer')
@@ -210,10 +210,11 @@ class BaseRunner(object):
         train_data = data_processor.get_train_data(epoch=-1)
         validation_data = data_processor.get_validation_data()
         test_data = data_processor.get_test_data()
+        # model=paddle.DataParallel(model)
         self._check_time(start=True)
+
         init_train = self.evaluate(model, train_data, data_processor,
-            metrics=['rmse', 'mae']) if train_data is not None else [-1.0
-            ] * len(self.metrics)
+            metrics=['rmse', 'mae']) if train_data is not None else [-1.0] * len(self.metrics)
         init_valid = self.evaluate(model, validation_data, data_processor
             ) if validation_data is not None else [-1.0] * len(self.metrics)
         init_test = self.evaluate(model, test_data, data_processor

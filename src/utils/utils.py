@@ -262,18 +262,12 @@ def clip_grad_value_(parameters, clip_value):
 
 
 def parse_global_args(parser):
-    parser.add_argument('--gpu', type=str, default='0', help= \
-        'Set CUDA_VISIBLE_DEVICES')
-    parser.add_argument('--verbose', type=int, default=logging.INFO, help= \
-        'Logging Level, 0, 10, ..., 50')
-    parser.add_argument('--log_file', type=str, default='../log/log.txt',
-                        help='Logging file path')
-    parser.add_argument('--result_file', type=str, default= \
-        '../result/result.npy', help='Result file path')
-    parser.add_argument('--random_seed', type=int, default=2022, help= \
-        'Random seed of numpy and pytorch')
-    parser.add_argument('--train', type=int, default=1, help= \
-        'To train the model or not.')
+    parser.add_argument('--gpu', type=str, default='0', help='Set CUDA_VISIBLE_DEVICES')
+    parser.add_argument('--verbose', type=int, default=logging.INFO, help='Logging Level, 0, 10, ..., 50')
+    parser.add_argument('--log_file', type=str, default='../log/log.txt', help='Logging file path')
+    parser.add_argument('--result_file', type=str, default='../result/result.npy', help='Result file path')
+    parser.add_argument('--random_seed', type=int, default=2022, help='Random seed of numpy and pytorch')
+    parser.add_argument('--train', type=int, default=1, help='To train the model or not.')
     return parser
 
 

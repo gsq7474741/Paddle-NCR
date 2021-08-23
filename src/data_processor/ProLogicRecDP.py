@@ -1,14 +1,14 @@
 import copy
-from src.utils import utils
+from utils import utils
 import numpy as np
 import logging
 import pandas as pd
 from tqdm import tqdm
 import paddle
 from collections import defaultdict
-from src.data_processor.HisDataProcessor import HisDataProcessor
-from src.data_processor.DataProcessor import DataProcessor
-from src.utils import global_p
+from data_processor.HisDataProcessor import HisDataProcessor
+from data_processor.DataProcessor import DataProcessor
+from utils import global_p
 
 
 class ProLogicRecDP(HisDataProcessor):

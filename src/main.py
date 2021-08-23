@@ -5,6 +5,7 @@ import sys
 import numpy as np
 import os
 import paddle
+import paddle.distributed as dist
 from utils import utils
 from data_loaders.DataLoader import DataLoader
 from models.BaseModel import BaseModel
@@ -149,6 +150,7 @@ def main():
     if args.load > 0:
         model.load_model()
     if args.train > 0:
+        dist.init_parallel_env()
         runner.train(model, data_processor, skip_eval=args.skip_eval)
     logging.info('Test After Training = ' + utils.format_metric(
         runner.evaluate(model, data_processor.get_test_data(), data_processor)) + ' ' + ','.join(runner.metrics))

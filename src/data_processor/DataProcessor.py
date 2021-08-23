@@ -1,12 +1,12 @@
 import copy
-from src.utils import utils
+from utils import utils
 import numpy as np
 import logging
 import pandas as pd
 from tqdm import tqdm
 import paddle
 from collections import defaultdict
-from src.utils import global_p
+from utils import global_p
 
 
 class DataProcessor(object):

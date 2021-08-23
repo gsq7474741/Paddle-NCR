@@ -3,15 +3,15 @@ import logging
 import paddle
 import paddle
 import pickle
-from src.utils import utils
-from src.utils import global_p
+from utils import utils
+from utils import global_p
 from tqdm import tqdm
 import numpy as np
 import copy
 from sklearn.metrics import *
 import itertools
 import pandas as pd
-from src.runners.BaseRunner import BaseRunner
+from runners.BaseRunner import BaseRunner
 
 
 class ProLogicRunner(BaseRunner):

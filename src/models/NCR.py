@@ -5,7 +5,7 @@ from models.BaseModel import BaseModel
 from utils import utils
 # from utils.utils import concat
 import numpy as np
-from src.utils import global_p
+from utils import global_p
 
 
 class NCR(BaseModel):
