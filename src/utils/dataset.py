@@ -10,8 +10,7 @@ from ..utils import global_p
 np.random.seed(2018)
 
 
-def random_split_data(all_data_file, dataset_name, vt_ratio=0.1, u_f=None,
-    i_f=None):
+def random_split_data(all_data_file, dataset_name, vt_ratio=0.1, u_f=None,i_f=None):
     """
     随机切分已经生成的数据集文件 *.all.csv -> *.train.csv,*.validation.csv,*.test.csv
     :param all_data_file: 数据预处理完的文件 *.all.csv

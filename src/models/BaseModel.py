@@ -1,4 +1,4 @@
-from x2paddle import torch2paddle
+# from x2paddle import torch2paddle
 import paddle
 import logging
 from sklearn.metrics import *
@@ -7,8 +7,17 @@ import paddle.nn.functional as F
 import paddle
 import os
 import pandas as pd
-from src.utils.rank_metrics import *
+from utils.rank_metrics import *
 
+
+def normal_init_(param, mean=0.0, std=1.0):
+    replaced_param = paddle.create_parameter(
+        shape=param.shape,
+        dtype=param.dtype,
+        default_initializer=paddle.nn.initializer.Assign(
+            paddle.normal(
+                mean=mean, std=std, shape=param.shape)))
+    paddle.assign(replaced_param, param)
 
 class BaseModel(paddle.nn.Layer):
     """
@@ -105,14 +114,13 @@ class BaseModel(paddle.nn.Layer):
         :return:
         """
         if type(m) == paddle.nn.Linear:
-            torch2paddle.normal_init_(m.weight, mean=0.0, std=0.01)
+            normal_init_(m.weight, mean=0.0, std=0.01)
             if m.bias is not None:
-                torch2paddle.normal_init_(m.bias, mean=0.0, std=0.01)
+                normal_init_(m.bias, mean=0.0, std=0.01)
         elif type(m) == paddle.nn.Embedding:
-            torch2paddle.normal_init_(m.weight, mean=0.0, std=0.01)
+            normal_init_(m.weight, mean=0.0, std=0.01)
 
-    def __init__(self, label_min, label_max, feature_num, random_seed=2018,
-        model_path='../model/Model/Model.pdiparams'):
+    def __init__(self, label_min, label_max, feature_num, random_seed=2018, model_path='../model/Model/Model.pdiparams'):
         super(BaseModel, self).__init__()
         self.label_min = label_min
         self.label_max = label_max
@@ -135,8 +143,7 @@ class BaseModel(paddle.nn.Layer):
         count number of parameters in the model
         :return:
         """
-        total_parameters = sum(p.numel() for p in self.parameters() if p.
-            requires_grad)
+        total_parameters = sum(p.numel() for p in self.parameters())
         return total_parameters
 
     def l2(self):

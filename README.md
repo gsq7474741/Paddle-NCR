@@ -34,7 +34,6 @@
   
 * ```requirements.txt
   paddlepaddle==2.1.2
-  x2paddle==1.3.1
   numpy==1.18.1
   pandas==0.24.2
   scipy==1.3.0

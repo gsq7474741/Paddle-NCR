@@ -1,10 +1,11 @@
-from x2paddle import torch2paddle
+# from x2paddle import torch2paddle
 import paddle
 import paddle
 import logging
 from time import time
-from src.utils import utils
-from src.utils import global_p
+from utils import utils
+from utils.utils import Momentum,Adam,clip_grad_value_
+from utils import global_p
 from tqdm import tqdm
 import numpy as np
 import copy
@@ -85,20 +86,19 @@ class BaseRunner(object):
         optimizer_name = self.optimizer_name.lower()
         if optimizer_name == 'gd':
             logging.info('Optimizer: GD')
-            optimizer = torch2paddle.Momentum(model.parameters(), lr=self.
+            optimizer = Momentum(model.parameters(), lr=self.
                 learning_rate, weight_decay=self.l2_weight)
         elif optimizer_name == 'adagrad':
             logging.info('Optimizer: Adagrad')
-            optimizer = paddle.optimizer.Adagrad(model.parameters(),
-                learning_rate=self.learning_rate, weight_decay=self.l2_weight)
+            optimizer = paddle.optimizer.Adagrad(model.parameters(),learning_rate=self.learning_rate, weight_decay=self.l2_weight)
         elif optimizer_name == 'adam':
             logging.info('Optimizer: Adam')
-            optimizer = torch2paddle.Adam(model.parameters(), lr=self.
-                learning_rate, weight_decay=self.l2_weight)
+            # optimizer=paddle.optimizer.Adam()
+            optimizer = Adam(model.parameters(), lr=self.learning_rate, weight_decay=self.l2_weight)
         else:
             logging.error('Unknown Optimizer: ' + self.optimizer_name)
             assert self.optimizer_name in ['GD', 'Adagrad', 'Adam']
-            optimizer = torch2paddle.Momentum(model.parameters(), lr=self.
+            optimizer = Momentum(model.parameters(), lr=self.
                 learning_rate, weight_decay=self.l2_weight)
         return optimizer
 
@@ -162,21 +162,18 @@ class BaseRunner(object):
         """
         if model.optimizer is None:
             model.optimizer = self._build_optimizer(model)
-        batches = data_processor.prepare_batches(data, self.batch_size,
-            train=True)
+        batches = data_processor.prepare_batches(data, self.batch_size,train=True)
         batches = self.batches_add_control(batches, train=True)
-        batch_size = (self.batch_size if data_processor.rank == 0 else self
-            .batch_size * 2)
+        batch_size = (self.batch_size if data_processor.rank == 0 else self.batch_size * 2)
         model.train()
         accumulate_size = 0
-        for batch in tqdm(batches, leave=False, desc='Epoch %5d' % (epoch +
-            1), ncols=100, mininterval=1):
+        for batch in tqdm(batches, leave=False, desc='Epoch %5d' % (epoch + 1), ncols=100, mininterval=1):
             accumulate_size += len(batch['Y'])
             model.optimizer.zero_grad()
             output_dict = model(batch)
             loss = output_dict['loss'] + model.l2() * self.l2_weight
-            loss.backward()
-            torch2paddle.clip_grad_value_(model.parameters(), 50)
+            loss.backward(retain_graph=True)
+            clip_grad_value_(model.parameters(), 50)
             if accumulate_size >= batch_size or batch is batches[-1]:
                 model.optimizer.step()
                 accumulate_size = 0

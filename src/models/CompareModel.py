@@ -1,11 +1,12 @@
-from x2paddle import torch2paddle
+# from x2paddle import torch2paddle
 import paddle
 import paddle
 import paddle.nn.functional as F
-from src.models.BaseModel import BaseModel
-from src.utils import utils
+from models.BaseModel import BaseModel
+from utils import utils
 import numpy as np
-from src.utils import global_p
+from utils import global_p
+from utils.utils import concat
 
 
 class CompareModel(BaseModel):
@@ -81,7 +82,7 @@ class CompareModel(BaseModel):
 
     def logic_and(self, vector1, vector2):
         assert len(vector1.size()) == len(vector2.size())
-        vector = torch2paddle.concat((vector1, vector2), dim=len(vector1.
+        vector = concat((vector1, vector2), dim=len(vector1.
             size()) - 1)
         vector = F.relu(self.and_layer_1(vector))
         vector = self.and_layer_2(vector)
@@ -89,7 +90,7 @@ class CompareModel(BaseModel):
 
     def logic_or(self, vector1, vector2):
         assert len(vector1.size()) == len(vector2.size())
-        vector = torch2paddle.concat((vector1, vector2), dim=len(vector1.
+        vector = concat((vector1, vector2), dim=len(vector1.
             size()) - 1)
         vector = F.relu(self.or_layer_1(vector))
         vector = self.or_layer_2(vector)
@@ -113,14 +114,14 @@ class CompareModel(BaseModel):
             ).float()
         user_vectors = self.uid_embeddings(u_ids)
         item_vectors = self.iid_embeddings(i_ids)
-        item_vectors = torch2paddle.concat((user_vectors, item_vectors), dim=1)
+        item_vectors = concat((user_vectors, item_vectors), dim=1)
         item_vectors = self.purchase_gate(item_vectors)
         uh_vectors = user_vectors.view(user_vectors.size(0), 1,
             user_vectors.size(1))
         uh_vectors = uh_vectors.expand(history_pos_tag.size(0),
             history_pos_tag.size(1), uh_vectors.size(2))
         his_vectors = self.iid_embeddings(history)
-        his_vectors = torch2paddle.concat((uh_vectors, his_vectors), dim=2)
+        his_vectors = concat((uh_vectors, his_vectors), dim=2)
         his_vectors = self.purchase_gate(his_vectors)
         not_his_vectors = self.logic_not(his_vectors)
         his_vectors = history_pos_tag * his_vectors + (1 - history_pos_tag
@@ -149,7 +150,7 @@ class CompareModel(BaseModel):
             prediction = paddle.nn.functional.cosine_similarity(sent_vector,
                 self.true.view([1, -1])) * (self.label_max - self.label_min
                 ) / 2 + (self.label_max + self.label_min) / 2
-        constraint = torch2paddle.concat(constraint, dim=1)
+        constraint = concat(constraint, dim=1)
         out_dict = {'prediction': prediction, 'check': check_list,
             'constraint': constraint}
         return out_dict

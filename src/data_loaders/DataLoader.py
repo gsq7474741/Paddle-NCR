@@ -4,8 +4,8 @@ import pandas as pd
 import numpy as np
 from collections import Counter
 import logging
-from src.utils.mining import group_user_interactions_df
-from src.utils import global_p
+from utils.mining import group_user_interactions_df
+from utils import global_p
 import json
 
 

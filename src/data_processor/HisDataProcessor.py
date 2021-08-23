@@ -1,15 +1,14 @@
-from x2paddle import torch2paddle
+# from x2paddle import torch2paddle
 import copy
-from src.utils import utils
+from utils import utils
 import numpy as np
 import logging
 import pandas as pd
 from tqdm import tqdm
 import paddle
-import paddle
 from collections import defaultdict
-from src.data_processor.DataProcessor import DataProcessor
-from src.utils import global_p
+from data_processor.DataProcessor import DataProcessor
+from utils import global_p
 
 
 class HisDataProcessor(DataProcessor):
@@ -72,7 +71,7 @@ class HisDataProcessor(DataProcessor):
                 history = paddle.to_tensor(i, v, paddle.fluid.layers.size([
                     real_batch_size, self.data_loader.item_num]), dtype=\
                     'float32')
-                if torch2paddle.device_count() > 0:
+                if paddle.device.get_device() != 'cpu':
                     history = history.cuda()
                 feed_dict[c] = history
             else:
@@ -127,7 +126,7 @@ class HisDataProcessor(DataProcessor):
                     history = paddle.to_tensor(i, v, paddle.fluid.layers.
                         size([real_batch_size * 2, self.data_loader.
                         item_num]), dtype='float32')
-                    if torch2paddle.device_count() > 0:
+                    if paddle.device.get_device() != 'cpu':
                         history = history.cuda()
                     feed_dict[c] = history
                 else:
