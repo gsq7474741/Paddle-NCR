@@ -164,9 +164,9 @@ class BaseModel(paddle.nn.Layer):
         to be output in the training process (for monitoring).
         """
         check_list = []
-        x = self.x_bn(feed_dict['X'].float())
+        x = self.x_bn(paddle.cast(feed_dict['X'],dtype='float32'))
         x = paddle.nn.Dropout(p=feed_dict['dropout'])(x)
-        prediction = F.relu(self.prediction(x)).view([-1])
+        prediction = paddle.reshape(F.relu(self.prediction(x)),[-1])
         out_dict = {'prediction': prediction, 'check': check_list}
         return out_dict
 
@@ -208,6 +208,6 @@ class BaseModel(paddle.nn.Layer):
         """
         if model_path is None:
             model_path = self.model_path
-        self.load_state_dict(paddle.load(model_path))
+        self.load_dict(paddle.load(model_path))
         self.eval()
         logging.info('Load model from ' + model_path)

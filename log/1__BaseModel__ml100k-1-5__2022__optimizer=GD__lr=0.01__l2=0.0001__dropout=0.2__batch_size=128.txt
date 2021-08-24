@@ -1,0 +1,8 @@
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'BaseModel', 'runner': 'BaseRunner', 'data_processor': 'DataProcessor', 'runner_name': 'BaseRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__BaseModel__ml100k-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__BaseModel__ml100k-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 1, 'path': '../dataset/', 'dataset': 'ml100k-1-5', 'sep': '\t', 'label': 'label', 'model_path': '../model/BaseModel/1__BaseModel__ml100k-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.pdiparams', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: BaseModel
+INFO:root:Runner: BaseRunner
+INFO:root:DataProcessor: DataProcessor
+INFO:root:# cuda device: cpu
+INFO:root:building train history csv...

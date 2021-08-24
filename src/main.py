@@ -151,6 +151,7 @@ def main():
         model.load_model()
     if args.train > 0:
         dist.init_parallel_env()
+        # model=paddle.DataParallel(model)
         runner.train(model, data_processor, skip_eval=args.skip_eval)
     logging.info('Test After Training = ' + utils.format_metric(
         runner.evaluate(model, data_processor.get_test_data(), data_processor)) + ' ' + ','.join(runner.metrics))
@@ -160,7 +161,7 @@ def main():
     logging.debug(runner.evaluate(model, data_processor.get_test_data(), data_processor))
     return
 
-
+# paddle.device.get_device()
 if __name__ == '__main__':
     # paddle.enable_static()
     main()

@@ -41,8 +41,7 @@ class NCR(BaseModel):
         self.pos_weight = pos_weight
         self.sim_scale = 10
         BaseModel.__init__(self, label_min=label_min, label_max=label_max,
-                           feature_num=feature_num, random_seed=random_seed, model_path= \
-                               model_path)
+                           feature_num=feature_num, random_seed=random_seed, model_path= model_path)
 
     def _init_weights(self):
         self.iid_embeddings = paddle.nn.Embedding(self.item_num, self.ui_vector_size)
