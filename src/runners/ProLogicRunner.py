@@ -1,17 +1,15 @@
-import paddle.nn.functional as F
-import logging
-import paddle
-import paddle
-import pickle
-from utils import utils
-from utils import global_p
-from tqdm import tqdm
-import numpy as np
 import copy
-from sklearn.metrics import *
 import itertools
+import logging
+import pickle
+
+import numpy as np
+import paddle
 import pandas as pd
 from runners.BaseRunner import BaseRunner
+from sklearn.metrics import accuracy_score
+from tqdm import tqdm
+from utils import global_p
 
 
 class ProLogicRunner(BaseRunner):
