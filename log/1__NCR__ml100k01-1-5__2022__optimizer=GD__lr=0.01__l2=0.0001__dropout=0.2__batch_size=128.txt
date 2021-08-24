@@ -61,3 +61,231 @@ INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@
 INFO:root:Load model from ../model/NCR/pretrain.pdiparams
 INFO:root:Test After Training = 0.3543,0.4095,0.5021,0.6730 ndcg@5,ndcg@10,hit@5,hit@10
 INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.pdiparams', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pretrain.pdiparams
+INFO:root:Test After Training = 0.3543,0.4095,0.5021,0.6730 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.pdiparams', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pretrain.pdiparams
+INFO:root:Test After Training = 0.3543,0.4095,0.5021,0.6730 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.model', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.pdiparams', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pretrain.pdiparams
+INFO:root:Test After Training = 0.3543,0.4095,0.5021,0.6730 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.model', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pretrain.model
+INFO:root:Test After Training = 0.3361,0.3927,0.4851,0.6603 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pretrain.model', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pretrain.model
+INFO:root:Test After Training = 0.3361,0.3927,0.4851,0.6603 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
+INFO:root:{'rank': 1, 'data_loader': 'DataLoader', 'model_name': 'NCR', 'runner': 'BaseRunner', 'data_processor': 'ProLogicRecDP', 'runner_name': 'ProLogicRunner'}
+INFO:root:{'gpu': '0', 'verbose': 20, 'log_file': '../log/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.txt', 'result_file': '../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy', 'random_seed': 2022, 'train': 0, 'path': '../dataset/', 'dataset': 'ml100k01-1-5', 'sep': '\t', 'label': 'label', 'u_vector_size': 64, 'i_vector_size': 64, 'r_weight': 0.1, 'ppl_weight': 0, 'pos_weight': 0, 'model_path': '../model/NCR/pre2.model', 'load': 1, 'epoch': 100, 'check_epoch': 1, 'early_stop': 1, 'lr': 0.01, 'batch_size': 128, 'eval_batch_size': 16384, 'dropout': 0.2, 'l2': 0.0001, 'optimizer': 'GD', 'metric': 'ndcg@5,ndcg@10,hit@5,hit@10', 'skip_eval': 0, 'max_his': 5, 'sup_his': 0, 'sparse_his': 1, 'test_neg_n': 100}
+INFO:root:DataLoader: DataLoader
+INFO:root:Model: NCR
+INFO:root:Runner: ProLogicRunner
+INFO:root:DataProcessor: ProLogicRecDP
+INFO:root:# cuda device: cpu
+INFO:root:load train csv...
+INFO:root:size of train: 94638
+INFO:root:load validation csv...
+INFO:root:size of validation: 2334
+INFO:root:load test csv...
+INFO:root:size of test: 3028
+INFO:root:load history csv...
+INFO:root:label: 0-1
+INFO:root:# of users: 944
+INFO:root:# of items: 1683
+INFO:root:# of user features: 0
+INFO:root:# of item features: 0
+INFO:root:# of context features: 0
+INFO:root:# of features: 0
+INFO:root:Model # of features 0
+INFO:root:Model # of feature dims 0
+INFO:root:# of params: 213760
+INFO:root:Drop Neg Samples...
+INFO:root:size of train: 53491
+INFO:root:size of validation: 942
+INFO:root:size of test: 942
+INFO:root:Prepare Test Data...
+INFO:root:Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Load model from ../model/NCR/pre2.model
+INFO:root:Test After Training = 0.3499,0.3993,0.5159,0.6688 ndcg@5,ndcg@10,hit@5,hit@10
+INFO:root:Save Test Results to ../result/1__NCR__ml100k01-1-5__2022__optimizer=GD__lr=0.01__l2=0.0001__dropout=0.2__batch_size=128.npy
