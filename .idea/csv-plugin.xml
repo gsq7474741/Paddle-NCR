@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/dataset/Electronics01-1-5/Electronics01-1-5.test.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/dataset/ml100k01-1-5/ml100k01-1-5.test.csv">
           <value>
             <Attribute>
@@ -39,6 +46,13 @@
           </value>
         </entry>
         <entry key="/dataset/ml100k01-1-5/ml100k01-1-5.validation.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="&#9;" />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/dataset/ml100k01-1-5/ml100k01-1-5.vt_group.csv">
           <value>
             <Attribute>
               <option name="separator" value="&#9;" />

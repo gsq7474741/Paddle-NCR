@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="bd777cfc-6dc9-4603-ba33-530f5b3b24fd" name="AI-YanJia">
+        <fileTransfer rootFolder="/home/songqi" accessType="SFTP" host="106.55.243.218" port="9001" sshConfigId="65b1d07d-23c5-4957-9102-a3c124924040" sshConfig="songqi@106.55.243.218:9001 key" keyPair="true">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

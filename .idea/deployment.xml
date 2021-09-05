@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="songqi@106.55.243.218:9001 key" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="AI-YanJia">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/pyproj/NCR-paddle-rebuilt" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="bscc-n22">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/run/NCR-0.2" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="songqi@106.55.243.218:9001 key">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/songqi/pyproj/NCR-paddle-rebuilt" local="$PROJECT_DIR$" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

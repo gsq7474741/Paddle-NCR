@@ -1,4 +1,11 @@
-# Data File Description
-Interactions in the datasets are sorted by original timestamp. All the interactions in train comes earlier than those in validation, and then earlier than those in test set. We do positive leave-one-out to keep the last user positive interaction (with rating >3) in the test set. The second to the last positive interaction is in validation set. To guarantee that we do not have cold start problem, we put all the interactions of users who with less than 5 interactions in train set only.
+# 数据集描述
 
-For interactions with label 0 in test sets are not used for evaluation. You can ignore those records since we only want to recommend the items that a user do want to buy. For interactions with label 0 in validation set are also not used for evaluation. However, we need to keep this information in the file so that the negative feedback information can be used as part of the sequence for recommending the item in the test set.
+数据集中的交互按原始时间戳排序。 时间顺序：训练集**早于**验证集**早于**测试集。
+我们实施了积极LOO（留一法）确实保留了一个，
+以确保最后一个用户的积极交互（评分>3）在测试集中，倒数第二个积极交互是在验证集中。
+为了保证我们不会出现冷启动问题，我们将交互少于5次用户的所有交互放在训练集中。
+
+对于与测试集中的标签0的交互，不用于评估。您可以忽略这些记录，
+因为我们只想推荐用户确实想购买的商品。对于与验证集中的标签0的交互，
+也不用于评估。但是我们需要将此信息保存在数据集中，
+以便将负反馈信息用作测试集中推荐项目的序列的一部分。
