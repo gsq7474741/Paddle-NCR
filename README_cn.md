@@ -1,75 +1,66 @@
 # NCR
 
-English | [简体中文](./README_cn.md)
+[English](./README.md) | 简体中文
 
 ----
-![require](https://img.shields.io/badge/Paddle-2.1.2-brightgreen "REQUIRE")
+[![require](https://img.shields.io/badge/Paddle-2.1.2-brightgreen)](REQUIRE)
 
 ----
 
-## 1 Introduction
+## 一、简介
 
-This project is an implementation of [Neural Collaborative Reasoning](https://arxiv.org/pdf/2005.08129.pdf) based on the
-PaddlePaddle Framework by Baidu. The NCR project using logical regularization to constrain simple two-layer neural
-network's behaviors and archives reasoning in user-item uid_embeddings space.
+本项目基于paddlepaddle框架复现 Neural Collaborative Reasoning，NCR基于神经网络构成的协同推理架构，使用了逻辑正则化算子来训练OR、NOT单元，以实现对用户-物品交互embedding的推理。
 
-### Abstract
 
-Existing Collaborative Filtering (CF) methods are mostly designed based on the idea of matching, i.e., by learning user
-and item embed- dings from data using shallow or deep models, they try to capture the associative relevance patterns in
-data, so that a user embedding can be matched with relevant item embeddings using designed or learned similarity
-functions. However, as a cognition rather than a perception intelligent task, recommendation requires not only the
-ability of pattern recognition and matching from data, but also the ability of cognitive reasoning in data.
+### 论文摘要
 
-**Model architecture**
+现有的协同过滤（CF）方法大多是基于匹配的思想设计的，然而，作为一项认知而非感知的智能任务，推荐不仅需要数据的模式识别和匹配能力，还需要数据的认知推理能力。 本文中作者提出了协同推理（CR），提出了一个模块化的推理体系结构，学习且(∧) ,
+或(∨) , 非（¬）等逻辑符号作为神经网络来实现蕴涵推理( →) 。
 
-![img](readme_imgs/image2.png)
+网络结构如下
 
-**Embedding and logical module using two full connect layers**
+[![img](readme_imgs/image2.png)](IMG)
 
-![img](readme_imgs/image3.png)
+网络的embedding和逻辑单元均使用双层全连接，使用ReLU作为激活函数
 
-**Using logical regularization to train OR and NOT module**
+[![img](readme_imgs/image3.png)](IMG)
 
-![img](readme_imgs/image6.png)
+作者使用逻辑正则化来训练或（OR）、非（NOT）模块
 
-**Paper:**
+[![img](readme_imgs/image6.png)](IMG)
 
-- [1] Chen, H. , Shi, S. , Y Li, & Y Zhang. (2020). Neural collaborative reasoning.<br>
 
-**References project：**
 
+**论文:**
+- [1] Chen, H. ,  Shi, S. ,  Y  Li, &  Y  Zhang. (2020). Neural collaborative reasoning.<br>
+
+**参考项目：**
 - [https://github.com/rutgerswiselab/NCR](https://github.com/rutgerswiselab/NCR)
 
-**AIStudio：**
+**项目aistudio地址：**
+- notebook任务：[https://aistudio.baidu.com/aistudio/projectdetail/2289941](https://aistudio.baidu.com/aistudio/projectdetail/2289941)
 
-- jupyter
-  notebook：[https://aistudio.baidu.com/aistudio/projectdetail/2289941](https://aistudio.baidu.com/aistudio/projectdetail/2289941)
+## 二、复现精度
 
-## 2 Metric
-
-> NCR model evaluation metric on ML100k dataset
+>该列指标在ML100k数据集上的评价指标
 
 | |N@5|N@10|HR@5|HR@10|
 | :---: | :---: | :---: | :---: | :---: |
 |ML100k|0.3794|0.4369|0.5446|0.7208|
 
-**Pretrained model：**
-[Weight](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)
 
-## 3 Environment
+**预训练模型：**
+[预训练权重](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)
 
-- hardware：GPU、CPU
 
-- requirements：
+## 三、环境依赖
+
+- 硬件：GPU、CPU
+
+- 框架：
     - PaddlePaddle = 2.1.2
-    - numpy==1.18.1
-    - pandas==0.24.2
-    - scipy==1.3.0
-    - tqdm==4.32.1
-    - scikit_learn==0.23.1
 
-## 5 Quick start
+## 五、快速开始
 
 ### Step1: clone
 
@@ -77,21 +68,17 @@ ability of pattern recognition and matching from data, but also the ability of c
 # clone this repo
 git clone https://github.com/gsq7474741/Paddle-NCR
 ```
-
-**install requirements**
-
+**安装依赖**
 ```bash
 pip install -r requirements.txt
 ```
 
-### Step2: train
-
+### Step2: 训练
 ```bash
 python ./main.py --rank 1 --model_name NCR --optimizer Adam --lr 0.001 --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 1 --gpu 1
 ```
 
-output:
-
+此时的输出为：
 ```
 Test Before Training = 0.0243,0.0432,0.0393,0.0987 ndcg@5,ndcg@10,hit@5,hit@10
 Prepare Train Data...
@@ -101,27 +88,27 @@ Optimizer: Adam
 Epoch     1:   5%|██▌                                              | 22/416 [00:04<01:17,  5.07it/s]
 ```
 
-### Step3: evaluate & predict
 
+### Step3: 评估&预测
 ```bash
 python ./main.py --rank 1 --train 0 --load 1 --model_name NCR --model_path ../model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 1 --gpu 0
 ```
-
-output:
-
+此时的输出为：
 ```
 Test Before Training = 0.0432,0.0612,0.0732,0.1295 ndcg@5,ndcg@10,hit@5,hit@10
 Load saved_model from saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model
 Test After Training = 0.3794,0.4369,0.5446,0.7208 ndcg@5,ndcg@10,hit@5,hit@10
 Save Test Results to result/result.npy
 ```
+预测结果存储为result/result.npy（可添加命令行参数指定存储路径）
+`
 
-predict result saved in result/result.npy (default dir)
+## 六、代码结构与详细说明
+
+### 6.1 代码结构
 
 
-## 6 Code information
 
-### 6.1 Code tree
 
 ```
 .
@@ -178,11 +165,13 @@ predict result saved in result/result.npy (default dir)
 
 ```
 
-### 6.2 Arguments 
 
 
+### 6.2 参数说明
 
-| args              | type  | default                                                    | help                                                           |
+可以在 `train.py` 中设置训练与评估相关参数，具体如下：
+
+| 参数              | 类型  | 默认值                                                        | 说明                                                            |
 |-------------------|-------|------------------------------------------------------------|-----------------------------------------------------------------|
 | --load            | int   | 0                                                          | Whether load saved_model and continue to train                  |
 | --epoch           | int   | 100                                                        | Number of epochs.                                               |
@@ -217,13 +206,17 @@ predict result saved in result/result.npy (default dir)
 | --sup_his         | int   | 0                                                          | If sup_his > 0 supplement history list with -1 at the beginning |
 | --sparse_his      | int   | 1                                                          | Whether use sparse representation of user history.              |
 
-## 7 Model information
 
-| info |  |
+## 七、模型信息
+
+关于模型的其他信息，可以参考下表：
+
+| 信息 | 说明 |
 | --- | --- |
-| release |高崧淇、赖楚芸|
-| date | 2021.09 |
-| Framework version | Paddle 2.1.2 |
-| hardware | GPU、CPU |
-| download | [Weight](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)  |
-| online | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2289941)|
+| 发布者 | 高崧淇、赖楚芸|
+| 时间 | 2021.09 |
+| 框架版本 | Paddle 2.1.2 |
+| 应用场景 | 推荐系统 |
+| 支持硬件 | GPU、CPU |
+| 下载链接 | [预训练权重](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)  |
+| 在线运行 | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2289941)|
