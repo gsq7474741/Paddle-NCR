@@ -1,4 +1,4 @@
-# NCR
+# NCR-Paddle
 
 [English](./README.md) | 简体中文
 
