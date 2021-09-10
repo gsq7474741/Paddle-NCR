@@ -60,6 +60,19 @@
 - 框架：
     - PaddlePaddle = 2.1.2
 
+## 四、数据集
+
+项目自带 ML100k、Amazon 5-core Movies and TV and Electronics数据集。
+数据集中的交互按原始时间戳排序。 时间顺序：训练集**早于**验证集**早于**测试集。
+我们实施了积极LOO（留一法）确实保留了一个，
+以确保最后一个用户的积极交互（评分>3）在测试集中，倒数第二个积极交互是在验证集中。
+为了保证我们不会出现冷启动问题，我们将交互少于5次用户的所有交互放在训练集中。
+
+对于与测试集中的标签0的交互，不用于评估。您可以忽略这些记录，
+因为我们只想推荐用户确实想购买的商品。对于与验证集中的标签0的交互，
+也不用于评估。但是我们需要将此信息保存在数据集中，
+以便将负反馈信息用作测试集中推荐项目的序列的一部分。
+
 ## 五、快速开始
 
 ### Step1: clone
@@ -74,8 +87,15 @@ pip install -r requirements.txt
 ```
 
 ### Step2: 训练
+
+从命令行传参开始
 ```bash
 python ./main.py --rank 1 --model_name NCR --optimizer Adam --lr 0.001 --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 1 --gpu 1
+```
+
+从脚本参数开始
+```bash
+python ./train.py
 ```
 
 此时的输出为：
@@ -90,9 +110,16 @@ Epoch     1:   5%|██▌                                              | 22/41
 
 
 ### Step3: 评估&预测
+从命令行传参开始
 ```bash
 python ./main.py --rank 1 --train 0 --load 1 --model_name NCR --model_path ../model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model --dataset ml100k01-1-5 --metric ndcg@5,ndcg@10,hit@5,hit@10 --max_his 5 --test_neg_n 100 --l2 1e-4 --r_weight 0.1 --random_seed 1 --gpu 0
 ```
+
+从脚本参数开始
+```bash
+python ./eval.py
+```
+
 此时的输出为：
 ```
 Test Before Training = 0.0432,0.0612,0.0732,0.1295 ndcg@5,ndcg@10,hit@5,hit@10
