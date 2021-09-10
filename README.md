@@ -44,7 +44,7 @@ ability of pattern recognition and matching from data, but also the ability of c
 **AIStudio：**
 
 - jupyter
-  notebook：[https://aistudio.baidu.com/aistudio/projectdetail/2289941](https://aistudio.baidu.com/aistudio/projectdetail/2289941)
+  notebook：[https://aistudio.baidu.com/aistudio/projectdetail/2336922](https://aistudio.baidu.com/aistudio/projectdetail/2336922)
 
 ## 2 Metric
 
@@ -233,4 +233,4 @@ predict result saved in result/result.npy (default dir)
 | Framework version | Paddle 2.1.2 |
 | hardware | GPU、CPU |
 | download | [Weight](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)  |
-| online | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2289941)|
+| online | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2336922)|

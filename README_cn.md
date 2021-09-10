@@ -38,7 +38,7 @@
 - [https://github.com/rutgerswiselab/NCR](https://github.com/rutgerswiselab/NCR)
 
 **项目aistudio地址：**
-- notebook任务：[https://aistudio.baidu.com/aistudio/projectdetail/2289941](https://aistudio.baidu.com/aistudio/projectdetail/2289941)
+- notebook任务：[https://aistudio.baidu.com/aistudio/projectdetail/2336922](https://aistudio.baidu.com/aistudio/projectdetail/2336922)
 
 ## 二、复现精度
 
@@ -246,4 +246,4 @@ Save Test Results to result/result.npy
 | 应用场景 | 推荐系统 |
 | 支持硬件 | GPU、CPU |
 | 下载链接 | [预训练权重](saved_model/NCR/0.3653_0.4254_0.5287_0.7144best_test.model)  |
-| 在线运行 | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2289941)|
+| 在线运行 | [notebook](https://aistudio.baidu.com/aistudio/projectdetail/2336922)|
